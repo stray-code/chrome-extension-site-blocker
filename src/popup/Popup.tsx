@@ -38,7 +38,6 @@ function App() {
       <Button
         type="button"
         size="xs"
-        color="red"
         styles={{
           root: {
             flexShrink: 0,

@@ -75,7 +75,6 @@ function Option() {
               />
               <Button
                 type="submit"
-                color="red"
                 styles={{
                   root: {
                     flexShrink: 0,
