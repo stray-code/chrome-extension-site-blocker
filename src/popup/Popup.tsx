@@ -1,8 +1,9 @@
-import { Button, Box } from '@mantine/core';
+import { Button, Box, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
 function App() {
   const [origin, setOrigin] = useState('');
+  const [enabled, setEnabled] = useState(true);
 
   const getTab = async () => {
     const [tab] = await chrome.tabs.query({
@@ -31,6 +32,10 @@ function App() {
         },
       );
     })();
+
+    chrome.storage.local.get(['SITE_BLOCK_ENABLED'], (value) => {
+      setEnabled(value?.SITE_BLOCK_ENABLED ?? true);
+    });
   }, []);
 
   return (
@@ -73,6 +78,11 @@ function App() {
       >
         設定ページ
       </Button>
+      {!enabled && (
+        <Text mt="md" size="xs" c="red">
+          サイトブロックが無効です
+        </Text>
+      )}
     </Box>
   );
 }
