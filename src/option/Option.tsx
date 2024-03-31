@@ -55,17 +55,17 @@ function Option() {
         >
           <Stack>
             <Group>
-            <Switch
-              label="サイトブロックを有効"
-              {...form.getInputProps('enabled', { type: 'checkbox' })}
-              onChange={(e) => {
-                const checked = e.target.checked;
+              <Switch
+                label="サイトブロックを有効"
+                {...form.getInputProps('enabled', { type: 'checkbox' })}
+                onChange={(e) => {
+                  const checked = e.target.checked;
 
-                form.setFieldValue('enabled', checked);
+                  form.setFieldValue('enabled', checked);
 
-                chrome.storage.local.set({ SITE_BLOCK_ENABLED: checked });
-              }}
-            />
+                  chrome.storage.local.set({ SITE_BLOCK_ENABLED: checked });
+                }}
+              />
             </Group>
             <Flex gap="md">
               <TextInput
@@ -76,7 +76,7 @@ function Option() {
               <Button
                 type="submit"
                 color="red"
-                        styles={{
+                styles={{
                   root: {
                     flexShrink: 0,
                   },

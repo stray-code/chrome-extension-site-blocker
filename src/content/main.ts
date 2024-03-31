@@ -8,8 +8,7 @@ chrome.runtime.onMessage.addListener(
 
     if (message.message === 'RELOAD') {
       window.location.reload();
-      return
+      return;
     }
   },
 );
-

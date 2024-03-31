@@ -1,7 +1,7 @@
 import { Button, Box } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
-function Popup() {
+function App() {
   const [origin, setOrigin] = useState('');
 
   const getTab = async () => {
@@ -78,4 +78,4 @@ function Popup() {
   );
 }
 
-export default Popup;
+export default App;
