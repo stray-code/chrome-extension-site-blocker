@@ -137,7 +137,7 @@ function Option() {
             </Table>
           </Paper>
         ) : (
-          <Text size="sm">ブロックするサイトがありません</Text>
+          <Text size="sm">ブロックするサイトが登録されていません</Text>
         )}
       </Stack>
     </Container>
