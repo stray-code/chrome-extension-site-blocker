@@ -15,7 +15,7 @@ import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
 
 function Option() {
-  const form = useForm<{ url: String; urlList: String[]; enabled: Boolean }>({
+  const form = useForm<{ url: string; urlList: string[]; enabled: boolean }>({
     initialValues: {
       url: '',
       urlList: [],
@@ -23,7 +23,7 @@ function Option() {
     },
     validate: {
       url: (url) =>
-        /https?:\/\/[\w!?\/+\-_~;.,*&@#$%()'[\]]+/.test(`${url}`)
+        /https?:\/\/[\w!?/+\-_~;.,*&@#$%()'[\]]+/.test(`${url}`)
           ? null
           : '正しい形式のURLを入力してください',
     },
@@ -37,6 +37,7 @@ function Option() {
         form.setFieldValue('enabled', value?.SITE_BLOCK_ENABLED ?? true);
       },
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

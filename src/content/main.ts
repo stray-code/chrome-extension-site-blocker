@@ -1,6 +1,6 @@
 // popupから受信
 chrome.runtime.onMessage.addListener(
-  (message, _, sendResponse: (response: any) => void) => {
+  (message, _, sendResponse: (response: { origin: string }) => void) => {
     if (message.message === 'GET_URL_ORIGIN') {
       sendResponse({ origin: window.location.origin });
       return;

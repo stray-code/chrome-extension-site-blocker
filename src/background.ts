@@ -21,7 +21,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(function (details) {
 
       // 正しいURLのみ抽出
       const correctUrlList = urlList.filter((url) => {
-        return /https?:\/\/[\w!?\/+\-_~;.,*&@#$%()'[\]]+/.test(url);
+        return /https?:\/\/[\w!?/+\-_~;.,*&@#$%()'[\]]+/.test(url);
       });
 
       if (correctUrlList.includes(origin)) {
