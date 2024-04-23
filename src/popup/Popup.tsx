@@ -1,5 +1,6 @@
 import { Button, Box, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { getLocalStorage, setLocalStorage } from '../utils';
 
 function App() {
   const [origin, setOrigin] = useState('');
@@ -31,11 +32,11 @@ function App() {
           }
         },
       );
-    })();
 
-    chrome.storage.local.get(['SITE_BLOCK_ENABLED'], (value) => {
-      setEnabled(value?.SITE_BLOCK_ENABLED ?? true);
-    });
+      const siteBlockEnabled = await getLocalStorage('SITE_BLOCK_ENABLED');
+
+      setEnabled(siteBlockEnabled ?? true);
+    })();
   }, []);
 
   return (
@@ -50,11 +51,12 @@ function App() {
         }}
         disabled={!origin}
         onClick={async () => {
-          chrome.storage.local.get('SITE_BLOCK_URL_LIST', (value) => {
-            const newUrlList = [...(value?.SITE_BLOCK_URL_LIST ?? []), origin];
+          const siteBlockUrlList = await getLocalStorage('SITE_BLOCK_URL_LIST');
 
-            chrome.storage.local.set({ SITE_BLOCK_URL_LIST: newUrlList });
-          });
+          await setLocalStorage('SITE_BLOCK_URL_LIST', [
+            ...(siteBlockUrlList ?? []),
+            origin,
+          ]);
 
           const tab = await getTab();
 

@@ -13,6 +13,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useEffect } from 'react';
+import { getLocalStorage, setLocalStorage } from '../utils';
 
 function Option() {
   const form = useForm<{ url: string; urlList: string[]; enabled: boolean }>({
@@ -30,13 +31,13 @@ function Option() {
   });
 
   useEffect(() => {
-    chrome.storage.local.get(
-      ['SITE_BLOCK_URL_LIST', 'SITE_BLOCK_ENABLED'],
-      (value) => {
-        form.setFieldValue('urlList', value?.SITE_BLOCK_URL_LIST ?? []);
-        form.setFieldValue('enabled', value?.SITE_BLOCK_ENABLED ?? true);
-      },
-    );
+    (async () => {
+      const siteBlockUrlList = await getLocalStorage('SITE_BLOCK_URL_LIST');
+      const siteBlockEnabled = await getLocalStorage('SITE_BLOCK_ENABLED');
+
+      form.setFieldValue('urlList', siteBlockUrlList ?? []);
+      form.setFieldValue('enabled', siteBlockEnabled ?? true);
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -51,7 +52,7 @@ function Option() {
             form.setFieldValue('urlList', newUrlList);
             form.setFieldValue('url', '');
 
-            chrome.storage.local.set({ SITE_BLOCK_URL_LIST: newUrlList });
+            setLocalStorage('SITE_BLOCK_URL_LIST', newUrlList);
           })}
         >
           <Stack>
@@ -64,7 +65,7 @@ function Option() {
 
                   form.setFieldValue('enabled', checked);
 
-                  chrome.storage.local.set({ SITE_BLOCK_ENABLED: checked });
+                  setLocalStorage('SITE_BLOCK_ENABLED', checked);
                 }}
               />
             </Group>
@@ -124,9 +125,7 @@ function Option() {
 
                           form.setFieldValue('urlList', newUrlList);
 
-                          chrome.storage.local.set({
-                            SITE_BLOCK_URL_LIST: newUrlList,
-                          });
+                          setLocalStorage('SITE_BLOCK_URL_LIST', newUrlList);
                         }}
                       >
                         削除
