@@ -25,7 +25,7 @@ function App() {
 
       chrome.tabs.sendMessage(
         tab.id,
-        { message: 'GET_URL_ORIGIN' },
+        { type: 'GET_URL_ORIGIN' },
         (response) => {
           if (response) {
             setOrigin(response.origin);
@@ -64,7 +64,7 @@ function App() {
             return;
           }
 
-          chrome.tabs.sendMessage(tab.id, { message: 'RELOAD' });
+          chrome.tabs.sendMessage(tab.id, { type: 'RELOAD' });
         }}
       >
         このサイトをブロック
