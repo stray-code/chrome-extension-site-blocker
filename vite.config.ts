@@ -6,7 +6,7 @@ const manifest = defineManifest({
   manifest_version: 3,
   name: 'サイトブロック',
   description: 'サイトを閲覧できないようにします。',
-  version: '1.0.1',
+  version: '1.0.2',
   icons: {
     16: 'img/icon16.png',
     48: 'img/icon48.png',
