@@ -6,18 +6,12 @@ function App() {
   const [origin, setOrigin] = useState('');
   const [enabled, setEnabled] = useState(true);
 
-  const getTab = async () => {
-    const [tab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-
-    return tab;
-  };
-
   useEffect(() => {
     (async () => {
-      const tab = await getTab();
+      const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
 
       if (!tab.id) {
         return;
@@ -58,7 +52,10 @@ function App() {
             origin,
           ]);
 
-          const tab = await getTab();
+          const [tab] = await chrome.tabs.query({
+            active: true,
+            currentWindow: true,
+          });
 
           if (!tab.id) {
             return;
