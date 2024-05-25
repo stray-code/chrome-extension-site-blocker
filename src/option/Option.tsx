@@ -38,7 +38,7 @@ function Option() {
       form.setFieldValue("urlList", siteBlockUrlList ?? []);
       form.setFieldValue("enabled", siteBlockEnabled ?? true);
     })();
-  }, [form.setFieldValue]);
+  }, []);
 
   return (
     <Container my="xl" size="sm">
