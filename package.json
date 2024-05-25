@@ -7,13 +7,16 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint --fix . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "format": "prettier -w src",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check": "biome check --apply .",
+    "tsc": "tsc --skipLibCheck --noEmit"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["npm run format", "npm run lint:fix"]
+    "*.{ts,tsx}": [
+      "bash -c \"npm run tsc\"",
+      "bash -c \"npm run check\""
+    ]
   },
   "dependencies": {
     "@mantine/core": "^7.7.1",
@@ -23,6 +26,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.3",
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
     "@types/chrome": "^0.0.263",
     "@types/react": "^18.2.66",
