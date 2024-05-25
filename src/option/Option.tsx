@@ -38,8 +38,7 @@ function Option() {
       form.setFieldValue("urlList", siteBlockUrlList ?? []);
       form.setFieldValue("enabled", siteBlockEnabled ?? true);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [form.setFieldValue]);
 
   return (
     <Container my="xl" size="sm">
