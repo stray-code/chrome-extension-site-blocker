@@ -1,24 +1,24 @@
 import {
-  Group,
   Button,
   Container,
   Flex,
-  TextInput,
-  Table,
-  Title,
-  Text,
-  Stack,
+  Group,
   Paper,
+  Stack,
   Switch,
-} from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { useEffect } from 'react';
-import { getLocalStorage, setLocalStorage } from '../utils';
+  Table,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useEffect } from "react";
+import { getLocalStorage, setLocalStorage } from "../utils";
 
 function Option() {
   const form = useForm<{ url: string; urlList: string[]; enabled: boolean }>({
     initialValues: {
-      url: '',
+      url: "",
       urlList: [],
       enabled: true,
     },
@@ -26,17 +26,17 @@ function Option() {
       url: (url) =>
         /https?:\/\/[\w!?/+\-_~;.,*&@#$%()'[\]]+/.test(`${url}`)
           ? null
-          : '正しい形式のURLを入力してください',
+          : "正しい形式のURLを入力してください",
     },
   });
 
   useEffect(() => {
     (async () => {
-      const siteBlockUrlList = await getLocalStorage('SITE_BLOCK_URL_LIST');
-      const siteBlockEnabled = await getLocalStorage('SITE_BLOCK_ENABLED');
+      const siteBlockUrlList = await getLocalStorage("SITE_BLOCK_URL_LIST");
+      const siteBlockEnabled = await getLocalStorage("SITE_BLOCK_ENABLED");
 
-      form.setFieldValue('urlList', siteBlockUrlList ?? []);
-      form.setFieldValue('enabled', siteBlockEnabled ?? true);
+      form.setFieldValue("urlList", siteBlockUrlList ?? []);
+      form.setFieldValue("enabled", siteBlockEnabled ?? true);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -49,30 +49,30 @@ function Option() {
           onSubmit={form.onSubmit((values) => {
             const newUrlList = [...values.urlList, values.url];
 
-            form.setFieldValue('urlList', newUrlList);
-            form.setFieldValue('url', '');
+            form.setFieldValue("urlList", newUrlList);
+            form.setFieldValue("url", "");
 
-            setLocalStorage('SITE_BLOCK_URL_LIST', newUrlList);
+            setLocalStorage("SITE_BLOCK_URL_LIST", newUrlList);
           })}
         >
           <Stack>
             <Group>
               <Switch
                 label="サイトブロックを有効"
-                {...form.getInputProps('enabled', { type: 'checkbox' })}
+                {...form.getInputProps("enabled", { type: "checkbox" })}
                 onChange={(e) => {
                   const checked = e.target.checked;
 
-                  form.setFieldValue('enabled', checked);
+                  form.setFieldValue("enabled", checked);
 
-                  setLocalStorage('SITE_BLOCK_ENABLED', checked);
+                  setLocalStorage("SITE_BLOCK_ENABLED", checked);
                 }}
               />
             </Group>
             <Flex gap="md">
               <TextInput
                 w="100%"
-                {...form.getInputProps('url')}
+                {...form.getInputProps("url")}
                 placeholder="https://ja.wikipedia.org"
               />
               <Button
@@ -99,10 +99,10 @@ function Option() {
                         size="sm"
                         styles={{
                           root: {
-                            wordBreak: 'break-word',
+                            wordBreak: "break-word",
                           },
                         }}
-                        c={form.values.enabled ? 'dark' : 'gray'}
+                        c={form.values.enabled ? "dark" : "gray"}
                       >
                         {url}
                       </Text>
@@ -123,9 +123,9 @@ function Option() {
                             (_, i) => i !== index,
                           );
 
-                          form.setFieldValue('urlList', newUrlList);
+                          form.setFieldValue("urlList", newUrlList);
 
-                          setLocalStorage('SITE_BLOCK_URL_LIST', newUrlList);
+                          setLocalStorage("SITE_BLOCK_URL_LIST", newUrlList);
                         }}
                       >
                         削除

@@ -1,8 +1,8 @@
-import { LocalStorageItems } from '../types';
+import type { LocalStorageItems } from "../types";
 
-type Values<T> = T extends 'SITE_BLOCK_URL_LIST'
-  ? LocalStorageItems['SITE_BLOCK_URL_LIST']
-  : LocalStorageItems['SITE_BLOCK_ENABLED'];
+type Values<T> = T extends "SITE_BLOCK_URL_LIST"
+  ? LocalStorageItems["SITE_BLOCK_URL_LIST"]
+  : LocalStorageItems["SITE_BLOCK_ENABLED"];
 
 export const setLocalStorage = async <T extends keyof LocalStorageItems>(
   key: T,

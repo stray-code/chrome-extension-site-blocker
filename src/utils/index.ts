@@ -1,2 +1,2 @@
-export * from './getLocalStorage';
-export * from './setLocalStorage';
+export * from "./getLocalStorage";
+export * from "./setLocalStorage";

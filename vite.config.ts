@@ -1,32 +1,32 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { crx, defineManifest } from '@crxjs/vite-plugin';
+import { crx, defineManifest } from "@crxjs/vite-plugin";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 const manifest = defineManifest({
   manifest_version: 3,
-  name: 'サイトブロック',
-  description: 'サイトを閲覧できないようにします。',
-  version: '1.0.3',
+  name: "サイトブロック",
+  description: "サイトを閲覧できないようにします。",
+  version: "1.0.3",
   icons: {
-    16: 'img/icon16.png',
-    48: 'img/icon48.png',
-    128: 'img/icon128.png',
+    16: "img/icon16.png",
+    48: "img/icon48.png",
+    128: "img/icon128.png",
   },
   action: {
-    default_popup: 'src/popup/index.html',
+    default_popup: "src/popup/index.html",
   },
   content_scripts: [
     {
-      js: ['src/content/main.ts'],
-      matches: ['http://*/*', 'https://*/*'],
+      js: ["src/content/main.ts"],
+      matches: ["http://*/*", "https://*/*"],
     },
   ],
-  options_page: 'src/option/index.html',
+  options_page: "src/option/index.html",
   background: {
-    service_worker: 'src/background.ts',
-    type: 'module',
+    service_worker: "src/background.ts",
+    type: "module",
   },
-  permissions: ['webNavigation', 'storage'],
+  permissions: ["webNavigation", "storage"],
 });
 
 // https://vitejs.dev/config/

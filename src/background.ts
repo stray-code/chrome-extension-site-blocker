@@ -1,17 +1,17 @@
-import { getLocalStorage } from './utils';
+import { getLocalStorage } from "./utils";
 
 chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
-  if (details.frameType !== 'outermost_frame') {
+  if (details.frameType !== "outermost_frame") {
     return;
   }
 
-  const siteBlockEnabled = await getLocalStorage('SITE_BLOCK_ENABLED');
+  const siteBlockEnabled = await getLocalStorage("SITE_BLOCK_ENABLED");
 
   if (!siteBlockEnabled) {
     return;
   }
 
-  const siteBlockUrlList = await getLocalStorage('SITE_BLOCK_URL_LIST');
+  const siteBlockUrlList = await getLocalStorage("SITE_BLOCK_URL_LIST");
 
   if (!siteBlockUrlList) {
     return;
@@ -26,6 +26,6 @@ chrome.webNavigation.onBeforeNavigate.addListener(async (details) => {
   const origin = url.origin;
 
   if (correctUrlList.includes(origin)) {
-    chrome.tabs.update(details.tabId, { url: 'about:blank' });
+    chrome.tabs.update(details.tabId, { url: "about:blank" });
   }
 });

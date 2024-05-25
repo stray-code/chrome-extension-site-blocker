@@ -1,9 +1,9 @@
-import { Button, Box, Text } from '@mantine/core';
-import { useEffect, useState } from 'react';
-import { getLocalStorage, setLocalStorage } from '../utils';
+import { Box, Button, Text } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { getLocalStorage, setLocalStorage } from "../utils";
 
 function App() {
-  const [origin, setOrigin] = useState('');
+  const [origin, setOrigin] = useState("");
   const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
 
       chrome.tabs.sendMessage(
         tab.id,
-        { type: 'GET_URL_ORIGIN' },
+        { type: "GET_URL_ORIGIN" },
         (response) => {
           if (response) {
             setOrigin(response.origin);
@@ -27,7 +27,7 @@ function App() {
         },
       );
 
-      const siteBlockEnabled = await getLocalStorage('SITE_BLOCK_ENABLED');
+      const siteBlockEnabled = await getLocalStorage("SITE_BLOCK_ENABLED");
 
       setEnabled(siteBlockEnabled ?? true);
     })();
@@ -45,9 +45,9 @@ function App() {
         }}
         disabled={!origin}
         onClick={async () => {
-          const siteBlockUrlList = await getLocalStorage('SITE_BLOCK_URL_LIST');
+          const siteBlockUrlList = await getLocalStorage("SITE_BLOCK_URL_LIST");
 
-          await setLocalStorage('SITE_BLOCK_URL_LIST', [
+          await setLocalStorage("SITE_BLOCK_URL_LIST", [
             ...(siteBlockUrlList ?? []),
             origin,
           ]);
@@ -61,7 +61,7 @@ function App() {
             return;
           }
 
-          chrome.tabs.sendMessage(tab.id, { type: 'RELOAD' });
+          chrome.tabs.sendMessage(tab.id, { type: "RELOAD" });
         }}
       >
         このサイトをブロック
